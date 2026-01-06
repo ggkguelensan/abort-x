@@ -1,0 +1,139 @@
+{
+  "name": "abort-x",
+  "version": "0.1.0",
+  "description": "Fluent API for AbortController/AbortSignal with type-safe combinators and patterns",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./core": {
+      "import": {
+        "types": "./dist/core/index.d.ts",
+        "default": "./dist/core/index.js"
+      },
+      "require": {
+        "types": "./dist/core/index.d.cts",
+        "default": "./dist/core/index.cjs"
+      }
+    },
+    "./combinators": {
+      "import": {
+        "types": "./dist/combinators/index.d.ts",
+        "default": "./dist/combinators/index.js"
+      },
+      "require": {
+        "types": "./dist/combinators/index.d.cts",
+        "default": "./dist/combinators/index.cjs"
+      }
+    },
+    "./timing": {
+      "import": {
+        "types": "./dist/timing/index.d.ts",
+        "default": "./dist/timing/index.js"
+      },
+      "require": {
+        "types": "./dist/timing/index.d.cts",
+        "default": "./dist/timing/index.cjs"
+      }
+    },
+    "./browser": {
+      "import": {
+        "types": "./dist/browser/index.d.ts",
+        "default": "./dist/browser/index.js"
+      },
+      "require": {
+        "types": "./dist/browser/index.d.cts",
+        "default": "./dist/browser/index.cjs"
+      }
+    },
+    "./patterns": {
+      "import": {
+        "types": "./dist/patterns/index.d.ts",
+        "default": "./dist/patterns/index.js"
+      },
+      "require": {
+        "types": "./dist/patterns/index.d.cts",
+        "default": "./dist/patterns/index.cjs"
+      }
+    },
+    "./guards": {
+      "import": {
+        "types": "./dist/guards/index.d.ts",
+        "default": "./dist/guards/index.js"
+      },
+      "require": {
+        "types": "./dist/guards/index.d.cts",
+        "default": "./dist/guards/index.cjs"
+      }
+    },
+    "./react": {
+      "import": {
+        "types": "./dist/react/index.d.ts",
+        "default": "./dist/react/index.js"
+      },
+      "require": {
+        "types": "./dist/react/index.d.cts",
+        "default": "./dist/react/index.cjs"
+      }
+    }
+  },
+  "sideEffects": false,
+  "files": [
+    "dist",
+    "src"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "test": "vitest",
+    "test:coverage": "vitest --coverage",
+    "lint": "eslint src --ext .ts,.tsx",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "abort",
+    "AbortController",
+    "AbortSignal",
+    "cancel",
+    "cancellation",
+    "timeout",
+    "retry",
+    "debounce",
+    "throttle",
+    "async",
+    "promise",
+    "fetch"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "eslint": "^8.55.0",
+    "tsup": "^8.0.1",
+    "typescript": "^5.3.2",
+    "vitest": "^1.0.4"
+  },
+  "peerDependencies": {
+    "react": ">=16.8.0"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    }
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}
