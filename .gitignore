@@ -29,3 +29,8 @@ npm-debug.log*
 # Cache
 .cache/
 *.tsbuildinfo
+
+# Size analysis (generated)
+size-report.json
+SIZE_REPORT.md
+.size-temp.js
