@@ -2,7 +2,7 @@
  * React hook for AbortController
  */
 
-import { useRef, useEffect, useCallback, useMemo } from 'react';
+import { useRef, useEffect, useCallback } from 'react';
 
 /**
  * React hook that creates an AbortController that automatically aborts on unmount.

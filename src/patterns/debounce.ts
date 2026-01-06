@@ -3,7 +3,6 @@
  */
 
 import { createAbortError } from '../core/polyfills';
-import { isAborted } from '../guards/is-aborted';
 
 /**
  * Debounced function interface
@@ -318,17 +317,23 @@ export function throttle<TArgs extends unknown[], TResult>(
 ): ThrottledFunction<TArgs, TResult> {
   const { signal, leading = true, trailing = true } = options;
 
-  // Throttle is debounce with maxWait = ms and specific leading/trailing
-  const debounced = debounce(fn, ms, {
-    signal,
+  // Build debounce options, only including signal if defined
+  const debounceOptions: DebounceOptions = {
     leading,
     trailing,
     maxWait: ms,
-  });
+  };
+  if (signal) {
+    debounceOptions.signal = signal;
+  }
 
-  return {
-    ...debounced,
-    pending: debounced.pending,
-    cancel: debounced.cancel,
-  } as ThrottledFunction<TArgs, TResult>;
+  // Throttle is debounce with maxWait = ms and specific leading/trailing
+  const debounced = debounce(fn, ms, debounceOptions);
+
+  // Create a proper throttled function that forwards calls
+  const throttled = ((...args: TArgs) => debounced(...args)) as ThrottledFunction<TArgs, TResult>;
+  throttled.pending = debounced.pending;
+  throttled.cancel = debounced.cancel;
+
+  return throttled;
 }

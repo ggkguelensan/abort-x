@@ -196,11 +196,14 @@ export async function mapAsync<TItem, TResult>(
   fn: (item: TItem, signal: AbortSignal, index: number) => Promise<TResult>,
   signal?: AbortSignal
 ): Promise<TResult[]> {
-  const { results } = await batch(items, fn, {
+  const options: BatchOptions = {
     concurrency: Infinity,
-    signal,
     stopOnError: true,
-  });
+  };
+  if (signal) {
+    options.signal = signal;
+  }
+  const { results } = await batch(items, fn, options);
 
   // Check for any failures
   for (const result of results) {

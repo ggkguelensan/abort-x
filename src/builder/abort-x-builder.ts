@@ -16,8 +16,7 @@ export class AbortXBuilder {
   private signals: AbortSignal[] = [];
   private timeoutMs?: number;
   private abortCallbacks: Array<(reason: unknown) => void> = [];
-  private progressEnabled = false;
-  private progressInterval = 100;
+  private _progressInterval = 100;
 
   /**
    * Add a timeout
@@ -50,8 +49,7 @@ export class AbortXBuilder {
    * Enable progress tracking
    */
   withProgress(intervalMs = 100): this {
-    this.progressEnabled = true;
-    this.progressInterval = intervalMs;
+    this._progressInterval = intervalMs;
     return this;
   }
 
@@ -106,16 +104,25 @@ export class AbortXBuilder {
     let currentProgress = 0;
     const callbacks = new Set<ProgressCallback>();
 
-    // Create progress signal
-    const progressSignal = Object.assign(signal, {
-      get progress() {
+    // Create progress signal with proper getter
+    Object.defineProperty(signal, 'progress', {
+      get() {
         return currentProgress;
       },
-      onProgress(callback: ProgressCallback): CleanupFn {
+      enumerable: true,
+      configurable: true,
+    });
+
+    Object.defineProperty(signal, 'onProgress', {
+      value(callback: ProgressCallback): CleanupFn {
         callbacks.add(callback);
         return () => callbacks.delete(callback);
       },
-    }) as ProgressSignal;
+      enumerable: true,
+      configurable: true,
+    });
+
+    const progressSignal = signal as ProgressSignal;
 
     const update = (progress: number) => {
       currentProgress = Math.max(0, Math.min(1, progress));
@@ -154,7 +161,7 @@ export class AbortXBuilder {
       if (progress >= 1 || signal.aborted) {
         clearInterval(intervalId);
       }
-    }, this.progressInterval);
+    }, this._progressInterval);
 
     signal.addEventListener(
       'abort',
