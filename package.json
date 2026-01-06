@@ -94,7 +94,8 @@
     "src"
   ],
   "scripts": {
-    "build": "tsup",
+    "build": "tsup && npm run size:readme",
+    "build:only": "tsup",
     "dev": "tsup --watch",
     "test": "vitest",
     "test:coverage": "vitest --coverage",
@@ -102,7 +103,8 @@
     "typecheck": "tsc --noEmit",
     "size": "size-limit",
     "size:report": "node scripts/analyze-sizes.mjs",
-    "prepublishOnly": "npm run build"
+    "size:readme": "node scripts/update-readme-sizes.mjs",
+    "prepublishOnly": "npm run build:only"
   },
   "keywords": [
     "abort",

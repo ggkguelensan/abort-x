@@ -30,6 +30,48 @@ yarn add abort-x
 pnpm add abort-x
 ```
 
+
+## 📦 Bundle Sizes
+
+<!-- BUNDLE_SIZES_START -->
+> Auto-generated on build. All sizes are minified.
+
+### Modules
+
+| Module | Minified | Gzipped |
+|--------|----------|----------|
+| Full bundle | 23.96 KB | 6.67 KB |
+| Core | 2.46 KB | 869 B |
+| Combinators | 5.72 KB | 1.56 KB |
+| Timing | 2.67 KB | 1.05 KB |
+| Browser | 5.26 KB | 1.31 KB |
+| Patterns | 7.55 KB | 2.72 KB |
+| Guards | 1.42 KB | 612 B |
+| React | 1.74 KB | 684 B |
+
+
+### Individual Functions
+
+| Function | Minified | Gzipped |
+|----------|----------|----------|
+| `timeout` | 627 B | 327 B |
+| `any` | 667 B | 323 B |
+| `abort` | 411 B | 209 B |
+| `isAborted` | 116 B | 115 B |
+| `withRetry` | 2.20 KB | 1000 B |
+| `debounce` | 1.68 KB | 758 B |
+| `AbortScope` | 1.89 KB | 722 B |
+| `AbortX (builder)` | 2.87 KB | 1.06 KB |
+
+
+### Common Use Cases
+
+| Use Case | Minified | Gzipped |
+|----------|----------|----------|
+| Basic (timeout + any + isAborted) | 1.17 KB | 538 B |
+| Retry with backoff | 2.24 KB | 1016 B |
+
+<!-- BUNDLE_SIZES_END -->
 ## Quick Start
 
 ```typescript
