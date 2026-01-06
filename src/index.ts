@@ -58,6 +58,13 @@ export {
   TypedAbortController,
   linkedController,
   typedLinkedController,
+  // Soft/Hard abort
+  SoftAbortController,
+  createSoftAbortController,
+  isSoftAborted,
+  isHardAborted,
+  onSoftAbort,
+  hardAbortOnly,
 } from './core';
 
 export type {
@@ -73,6 +80,9 @@ export type {
   CleanupFn,
   ProgressCallback,
   ProgressSignal,
+  CancellationPriority,
+  AbortReasonWithPriority,
+  SoftAbortSignal,
 } from './core';
 
 // =============================================================================
@@ -167,12 +177,30 @@ export {
   getMemoryInfo,
   isMemoryPressure,
   isMemoryApiSupported,
+  // WebSocket
+  createAbortableWebSocket,
+  createWebSocketWithSignals,
+  // Upload/Download
+  createAbortableUpload,
+  createMultiUpload,
+  createAbortableDownload,
 } from './browser';
 
 export type {
   VisibilitySignalOptions,
   StorageQuotaInfo,
   MemoryInfo,
+  AbortableWebSocketOptions,
+  AbortableWebSocket,
+  UploadProgress,
+  UploadOptions,
+  UploadResult,
+  AbortableUpload,
+  MultiUploadProgress,
+  MultiUploadOptions,
+  MultiUploadResult,
+  DownloadProgress,
+  AbortableDownload,
 } from './browser';
 
 // =============================================================================
@@ -198,6 +226,12 @@ export {
   mapAsync,
   filterAsync,
   findAsync,
+  // Registry
+  AbortRegistry,
+  globalRegistry,
+  registerAbort,
+  abortRegistered,
+  abortByTag,
 } from './patterns';
 
 export type {
@@ -210,6 +244,9 @@ export type {
   ThrottleOptions,
   BatchOptions,
   BatchResult,
+  RegistryEntry,
+  RegisterOptions,
+  AbortOptions as RegistryAbortOptions,
 } from './patterns';
 
 // =============================================================================
@@ -234,3 +271,29 @@ export {
 // =============================================================================
 
 export { AbortX, AbortXBuilder } from './builder';
+
+// =============================================================================
+// Integrations - TanStack Query helpers
+// =============================================================================
+
+export {
+  createCancellableQuery,
+  createCancellableMutation,
+  withQueryTimeout,
+  isAbortRelatedError,
+  skipAbortRetry,
+  throwOnErrorIgnoreAbort,
+  createMutationOptions,
+  createInfiniteQueryRegistry,
+} from './integrations';
+
+export type {
+  QueryFnContext,
+  MutationContext,
+  QueryFn,
+  MutationFn,
+  CancellableQueryOptions,
+  CancellableMutationOptions,
+  CancellableQueryResult,
+  CancellableMutationResult,
+} from './integrations';

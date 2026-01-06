@@ -10,6 +10,8 @@ export default defineConfig({
     'patterns/index': 'src/patterns/index.ts',
     'guards/index': 'src/guards/index.ts',
     'react/index': 'src/react/index.ts',
+    'integrations/index': 'src/integrations/index.ts',
+    'testing/index': 'src/testing/index.ts',
   },
   format: ['esm', 'cjs'],
   dts: true,

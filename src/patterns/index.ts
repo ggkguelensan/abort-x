@@ -44,3 +44,17 @@ export type {
   BatchOptions,
   BatchResult,
 } from './batch';
+
+// Registry for global abort management
+export {
+  AbortRegistry,
+  globalRegistry,
+  registerAbort,
+  abortRegistered,
+  abortByTag,
+} from './registry';
+export type {
+  RegistryEntry,
+  RegisterOptions,
+  AbortOptions,
+} from './registry';

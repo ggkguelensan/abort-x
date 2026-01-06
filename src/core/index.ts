@@ -47,3 +47,18 @@ export {
   linkedController,
   typedLinkedController,
 } from './controller';
+
+// Soft/Hard abort
+export {
+  SoftAbortController,
+  createSoftAbortController,
+  isSoftAborted,
+  isHardAborted,
+  onSoftAbort,
+  hardAbortOnly,
+} from './soft-abort';
+export type {
+  CancellationPriority,
+  AbortReasonWithPriority,
+  SoftAbortSignal,
+} from './soft-abort';

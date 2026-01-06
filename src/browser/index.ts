@@ -40,3 +40,31 @@ export {
   isMemoryApiSupported,
 } from './memory';
 export type { MemoryInfo } from './memory';
+
+// WebSocket
+export {
+  createAbortableWebSocket,
+  createWebSocketWithSignals,
+} from './websocket';
+export type {
+  AbortableWebSocketOptions,
+  AbortableWebSocket,
+} from './websocket';
+
+// File Upload/Download
+export {
+  createAbortableUpload,
+  createMultiUpload,
+  createAbortableDownload,
+} from './upload';
+export type {
+  UploadProgress,
+  UploadOptions,
+  UploadResult,
+  AbortableUpload,
+  MultiUploadProgress,
+  MultiUploadOptions,
+  MultiUploadResult,
+  DownloadProgress,
+  AbortableDownload,
+} from './upload';

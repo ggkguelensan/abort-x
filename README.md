@@ -40,12 +40,12 @@ pnpm add abort-x
 
 | Module | Minified | Gzipped |
 |--------|----------|----------|
-| Full bundle | 23.96 KB | 6.67 KB |
-| Core | 2.46 KB | 869 B |
+| Full bundle | 34.50 KB | 10.00 KB |
+| Core | 3.88 KB | 1.23 KB |
 | Combinators | 5.72 KB | 1.56 KB |
 | Timing | 2.67 KB | 1.05 KB |
-| Browser | 5.26 KB | 1.31 KB |
-| Patterns | 7.55 KB | 2.72 KB |
+| Browser | 10.20 KB | 3.19 KB |
+| Patterns | 9.67 KB | 3.38 KB |
 | Guards | 1.42 KB | 612 B |
 | React | 1.74 KB | 684 B |
 
@@ -68,7 +68,7 @@ pnpm add abort-x
 
 | Use Case | Minified | Gzipped |
 |----------|----------|----------|
-| Basic (timeout + any + isAborted) | 1.17 KB | 538 B |
+| Basic (timeout + any + isAborted) | 1.17 KB | 539 B |
 | Retry with backoff | 2.24 KB | 1016 B |
 
 <!-- BUNDLE_SIZES_END -->
