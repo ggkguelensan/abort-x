@@ -462,10 +462,7 @@ const result = await scope.run(async (signal) => {
   return { user, posts };
 });
 
-// Create child scopes
-const childScope = scope.child();
-
-// Execute in parallel
+// Execute in parallel (one error cancels all)
 await scope.all([
   (signal) => fetchA(signal),
   (signal) => fetchB(signal),
@@ -474,6 +471,63 @@ await scope.all([
 
 // Cleanup everything
 scope.dispose();
+```
+
+#### Child Scopes
+
+Child scopes inherit cancellation from parent, but can be cancelled independently:
+
+```typescript
+const appScope = new AbortScope();
+
+// Create isolated child scopes
+const userScope = appScope.child();
+const postsScope = appScope.child();
+const notificationsScope = appScope.child();
+
+// Start independent requests
+fetchUser(userScope.signal);
+fetchPosts(postsScope.signal);
+fetchNotifications(notificationsScope.signal);
+
+// Cancel only posts - user and notifications continue
+postsScope.abort('user_scrolled_away');
+
+// Cancel everything at once
+appScope.dispose();
+```
+
+#### Error Isolation with Child Scopes
+
+```typescript
+const scope = new AbortScope();
+
+// Each child isolates errors - one failure doesn't cancel others
+const results = await Promise.allSettled([
+  scope.child().run(async (signal) => fetch('/api/critical', { signal })),
+  scope.child().run(async (signal) => fetch('/api/optional', { signal })),
+]);
+
+// vs scope.all() where one error cancels all
+await scope.all([
+  (signal) => fetch('/api/a', { signal }),
+  (signal) => fetch('/api/b', { signal }), // Error here cancels /api/a
+]);
+```
+
+#### Cleanup Functions
+
+```typescript
+const scope = new AbortScope();
+
+// Register cleanup to run on dispose
+scope.onDispose(() => {
+  websocket.close();
+  saveDraft();
+});
+
+// Later...
+scope.dispose(); // All cleanup functions execute
 ```
 
 ### Debounce
